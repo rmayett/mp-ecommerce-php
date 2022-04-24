@@ -1,0 +1,40 @@
+curl -X POST \
+    'https://api.mercadopago.com/checkout/preferences' \
+    -H 'Authorization: Bearer APP_USR-1159009372558727-072921-8d0b9980c7494985a5abd19fbe921a3d-617633181' \
+    -H 'Content-Type: application/json' \
+    -d '{
+  "items": [
+    {
+      "title": "Smartphone",
+      "description": "Smartphone",
+      "picture_url": "http://www.myapp.com/myimage.jpg",
+      "category_id": "car_electronics",
+      "quantity": 1,
+      "currency_id": "MX",
+      "unit_price": 10
+    }
+  ],
+  "payer": {
+    "phone": {},
+    "identification": {},
+    "address": {}
+  },
+  "payment_methods": {
+    "excluded_payment_methods": [
+      {"id":"amex"}
+    ],
+    "excluded_payment_types": [
+      {"id":"atm"}
+    ],
+    "installments": 6
+  },
+  "shipments": {
+    "free_methods": [
+      {}
+    ],
+    "receiver_address": {}
+  },
+  "back_urls": {},
+  "differential_pricing": {},
+  "metadata": {}
+}'

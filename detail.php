@@ -544,7 +544,6 @@
                                             <?php echo "$" . $_POST['unit'] ?>
                                         </h3>
                                     </div>
-                                    <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>
                                     <div class="cho-container"></div>
                                 </div>
                             </div>
