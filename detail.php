@@ -543,7 +543,7 @@
                                         <h3>
                                             <?php echo $_POST['unit'] ?>
                                         </h3>
-                                        <h3 id="url" style="display:hidden;">
+                                        <h3 id="url" style="display:none;">
                                             <?php echo $_POST['img'] ?>
                                         </h3>
                                     </div>
@@ -584,11 +584,8 @@
             <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle>
         </svg> </div>
     <div id="ac-gn-viewport-emitter"> </div>
-        <p id="request" style="display: hidden;">
-        <?php echo "?price=" . $_POST['price'] ."&". $_POST['unit'] ."". $_POST['img'] ?>
-        </p>
     <script>
-        $.ajax('https://sbx.portalventas.net/gps-mp-split-report/splitter-test/preference?price='+$("#price").html()+"&url="+$("#url").html()+"&"+$("#product").html(), // request url
+        $.ajax('https://sbx.portalventas.net/gps-mp-split-report/splitter-test/preference?price='+$("#price").html()+"&url="+$("#url").html()+"&product="+$("#product").html(), // request url
             {
                 success: function(data, status, xhr) { // success callback function
                     if (data.exito) {
