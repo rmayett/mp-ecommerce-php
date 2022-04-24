@@ -585,7 +585,7 @@
         </svg> </div>
     <div id="ac-gn-viewport-emitter"> </div>
     <script>
-        $.ajax('https://sbx.portalventas.net/gps-mp-split-report/splitter-test/preference?price='+$("#price").html()+"&url="+$("#url").html()+"&product="+$("#product").html(), // request url
+        $.ajax('https://sbx.portalventas.net/gps-mp-split-report/splitter-test/preference?price='+$("#price").html().trim()+"&url="+$("#url").html().trim().substring(1)+"&product="+$("#product").html().trim(), // request url
             {
                 success: function(data, status, xhr) { // success callback function
                     if (data.exito) {
