@@ -9,8 +9,8 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="format-detection" content="telephone=no">
-    
-	<script src="https://sdk.mercadopago.com/js/v2"></script>
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
     <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -532,16 +532,19 @@
                                         <div class="as-producttile-title">
                                             <h3 class="as-producttile-name">
                                                 <p class="as-producttile-tilelink">
-                                                    <span data-ase-truncate="2"><?php echo $_POST['title'] ?></span>
+                                                    <span data-ase-truncate="2" id="product"><?php echo $_POST['title'] ?></span>
                                                 </p>
 
                                             </h3>
                                         </div>
-                                        <h3>
-                                            <?php echo $_POST['price'] ?>
+                                        <h3 id="price">
+                                            <?php echo "$" . $_POST['price'] ?>
                                         </h3>
                                         <h3>
-                                            <?php echo "$" . $_POST['unit'] ?>
+                                            <?php echo $_POST['unit'] ?>
+                                        </h3>
+                                        <h3 id="url" style="display:hidden;">
+                                            <?php echo $_POST['img'] ?>
                                         </h3>
                                     </div>
                                     <div class="cho-container"></div>
@@ -581,21 +584,30 @@
             <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle>
         </svg> </div>
     <div id="ac-gn-viewport-emitter"> </div>
-
+        <p id="request" style="display: hidden;">
+        <?php echo "?price=" . $_POST['price'] ."&". $_POST['unit'] ."". $_POST['img'] ?>
+        </p>
     <script>
-        //Adicione as credenciais de sua conta Mercado Pago junto ao SDK
-        const mp = new MercadoPago('APP_USR-d81f7be9-ee11-4ff0-bf4e-20c36981d7bf', {
-            locale: 'es-MX'
-        });
-        const checkout = mp.checkout({
-            preference: {
-                id: '617633181-afdffd57-2d05-4dfa-8e07-eeff48518267' // Indica el ID de la preferencia
-            },
-            render: {
-                container: '.cho-container', // Clase CSS para renderizar el botón de pago
-                label: 'Pagar', // Cambiar el texto del botón de pago (opcional)
-            }
-        });
+        $.ajax('https://sbx.portalventas.net/gps-mp-split-report/splitter-test/preference?price='+$("#price").html()+"&url="+$("#url").html()+"&"+$("#product").html(), // request url
+            {
+                success: function(data, status, xhr) { // success callback function
+                    if (data.exito) {
+                        //Adicione as credenciais de sua conta Mercado Pago junto ao SDK
+                        const mp = new MercadoPago('APP_USR-d81f7be9-ee11-4ff0-bf4e-20c36981d7bf', {
+                            locale: 'es-MX'
+                        });
+                        const checkout = mp.checkout({
+                            preference: {
+                                id: data.id // Indica el ID de la preferencia
+                            },
+                            render: {
+                                container: '.cho-container', // Clase CSS para renderizar el botón de pago
+                                label: 'Pagar', // Cambiar el texto del botón de pago (opcional)
+                            }
+                        });
+                    }
+                }
+            });
     </script>
 </body>
 
