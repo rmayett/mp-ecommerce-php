@@ -11,7 +11,7 @@
     <meta name="format-detection" content="telephone=no">
 
     <script src="https://sdk.mercadopago.com/js/v2"></script>
-    <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+    <script src="https://www.mercadopago.com/v2/security.js" view="item" output="deviceId"></script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
@@ -598,7 +598,7 @@
                             },
                             render: {
                                 container: '.cho-container', // Clase CSS para renderizar el botón de pago
-                                label: 'Pagar', // Cambiar el texto del botón de pago (opcional)
+                                label: 'Pagar la compra', // Cambiar el texto del botón de pago (opcional)
                             }
                         });
                     }
